@@ -1,1 +1,21 @@
-
+name: Feature branch stuff
+on: 
+  push: 
+    branches: 
+      - 'feature*'
+      
+jobs:
+  
+  build:
+    name: Building
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Buduje mosty dla Pana Starosty!"
+  
+  UT:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Testuje mosty dla Pana Starosty!"
+      
+    
