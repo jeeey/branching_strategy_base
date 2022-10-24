@@ -16,6 +16,7 @@ jobs:
   
   UT:
     name: Unit Tests
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - run: echo "Testuje mosty dla Pana Starosty!"

@@ -16,6 +16,7 @@ jobs:
       
   dockerize:
     name: Building docker image
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - run: echo '1) Sciagamy mosty'
