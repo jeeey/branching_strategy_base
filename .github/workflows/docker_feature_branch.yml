@@ -1,0 +1,22 @@
+name: Feature branch docker
+on:
+  push:
+    branches:
+      - 'feature*'
+    paths:
+      - '*Dockerfile'
+
+jobs:
+  build:
+    name: Building artifact
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo '1) Budujemy mosty dla Pana Starosty!'
+      - run: echo '2) Uploadujemy mosty'
+      
+  dockerize:
+    name: Building docker image
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo '1) Sciagamy mosty'
+      - run: echo '2) Tworzymy kontener'
