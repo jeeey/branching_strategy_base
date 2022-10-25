@@ -1,0 +1,19 @@
+name: PR to main pipe
+
+on:
+  pull_request:
+    branches: 
+      - main
+    types: 
+      - opened
+      
+jobs:
+  
+  squash:
+    name: Squashin smashin commits
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Squash me baby!"
+      - uses: tibdex/autosquash@v2
+        with:
+          github_token: ${{ secrets.AUTOSQUASH_TOKEN }}

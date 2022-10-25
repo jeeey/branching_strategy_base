@@ -3,6 +3,8 @@ on:
   push: 
     branches: 
       - 'feature*'
+    paths-ignore:
+      - '*Dockerfile*'
       
 jobs:
   
@@ -14,8 +16,15 @@ jobs:
   
   UT:
     name: Unit Tests
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - run: echo "Testuje mosty dla Pana Starosty!"
-      
+
+  lint:
+    name: Lint the code
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Lintujemy mosty dla Pana Starosty!"
     
