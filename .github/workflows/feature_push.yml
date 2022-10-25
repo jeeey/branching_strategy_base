@@ -2,7 +2,7 @@ name: Feature branch stuff
 on: 
   push: 
     branches: 
-      - 'feature*'
+      - 'feature/*'
     paths-ignore:
       - '*Dockerfile*'
       
