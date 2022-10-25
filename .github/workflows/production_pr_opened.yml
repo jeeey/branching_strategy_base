@@ -1,0 +1,23 @@
+name: Opened PR to production pipe
+
+on:
+  pull_request:
+    branches: 
+      - production
+    types: 
+      - opened
+      
+jobs:
+  
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building"
+
+  test:
+    name: Testing
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test me hard baby!"
