@@ -6,15 +6,23 @@ on:
     paths:
       - '*Dockerfile*'
 
+env:
+  build_artifact: main_artifact
+  artifact_file: 'main.py'
+
 jobs:
   build:
     name: Building artifact
     runs-on: ubuntu-latest
     steps:
-      - run: echo '1) Budujemy mosty dla Pana Starosty!'
       - uses: actions/checkout@v3
+      - run: echo '1) Budujemy mosty dla Pana Starosty!'
       - run: python3 main.py
       - run: echo '2) Uploadujemy mosty'
+      - uses: actions/upload-artifacts@v3
+        with:
+          name: ${{ env.build_artifact }}
+          path: ./${{ env.artifact_file }}
       
   dockerize:
     name: Building docker image
@@ -22,4 +30,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo '1) Sciagamy mosty'
+      - uses: actions/download-artifacts@v3
+        with:
+          name: ${{ env.build_artifact }}
       - run: echo '2) Tworzymy kontener'
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: false
+          tags: |
+            user/app:latest
+            user/app:1.0.0
+            ghcr.io/user/app:latest
+            ghcr.io/user/app:1.0.0
