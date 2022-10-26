@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo '1) Budujemy mosty dla Pana Starosty!'
+      - uses: actions/checkout@v3
+      - run: python3 main.py
       - run: echo '2) Uploadujemy mosty'
       
   dockerize:
