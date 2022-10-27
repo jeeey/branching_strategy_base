@@ -5,19 +5,47 @@ on:
       - 'feature/*'
     paths:
       - '*Dockerfile*'
+      - '.github/workflows/feature_push_docker.yml'
+
+env:
+  build_artifact: main_artifact
+  artifact_directory: 'build/*'
 
 jobs:
   build:
     name: Building artifact
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: echo '1) Budujemy mosty dla Pana Starosty!'
+      - run: |
+            python3 main.py
+            mkdir build
+            cp main.py build/
+            cp Dockerfile build/
       - run: echo '2) Uploadujemy mosty'
+      - uses: actions/upload-artifact@v3      
+        with:
+          name: ${{ env.build_artifact }}
+          path: ./${{ env.artifact_directory }}
       
   dockerize:
     name: Building docker image
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - run: echo '1) Sciagamy mosty'
+      - run: echo '1) Sciagamy mosty '
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.build_artifact }}
       - run: echo '2) Tworzymy kontener'
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: false
+#          tags: |
+#            user/app:latest
+#            user/app:1.0.0
+#            ghcr.io/user/app:latest
+#            ghcr.io/user/app:1.0.0
