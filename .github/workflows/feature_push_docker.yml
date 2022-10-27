@@ -5,6 +5,7 @@ on:
       - 'feature/*'
     paths:
       - '*Dockerfile*'
+      - '*feature_push_docker.yml'
 
 env:
   build_artifact: main_artifact

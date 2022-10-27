@@ -5,6 +5,7 @@ on:
       - 'feature/*'
     paths-ignore:
       - '*Dockerfile*'
+      - '*feature_push_docker.yml'
       
 jobs:
   
