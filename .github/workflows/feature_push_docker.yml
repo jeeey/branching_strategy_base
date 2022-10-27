@@ -8,7 +8,7 @@ on:
 
 env:
   build_artifact: main_artifact
-  artifact_file: 'main.py'
+  artifact_directory: './build/*'
 
 jobs:
   build:
@@ -17,12 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo '1) Budujemy mosty dla Pana Starosty!'
-      - run: python3 main.py
+      - run: |
+            python3 main.py
+            mkdir build
+            cp main.py build/
+            cp Dockerfile build/
       - run: echo '2) Uploadujemy mosty'
-      - uses: actions/upload-artifacts@v3
+      - uses: actions/upload-artifact@v3.0.1      
         with:
           name: ${{ env.build_artifact }}
-          path: ./${{ env.artifact_file }}
+          path: ./${{ env.artifact_directory }}
       
   dockerize:
     name: Building docker image
@@ -40,8 +44,8 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: |
-            user/app:latest
-            user/app:1.0.0
-            ghcr.io/user/app:latest
-            ghcr.io/user/app:1.0.0
+#          tags: |
+#            user/app:latest
+#            user/app:1.0.0
+#            ghcr.io/user/app:latest
+#            ghcr.io/user/app:1.0.0
