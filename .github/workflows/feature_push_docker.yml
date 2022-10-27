@@ -34,7 +34,7 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - run: echo '1) Sciagamy mosty'
+      - run: echo '1) Sciagamy mosty '
       - uses: actions/download-artifacts@v3
         with:
           name: ${{ env.build_artifact }}
