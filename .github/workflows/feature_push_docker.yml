@@ -5,7 +5,7 @@ on:
       - 'feature/*'
     paths:
       - '*Dockerfile*'
-      - '*feature_push_docker.yml'
+      - './github/workflows/feature_push_docker.yml'
 
 env:
   build_artifact: main_artifact
@@ -24,7 +24,7 @@ jobs:
             cp main.py build/
             cp Dockerfile build/
       - run: echo '2) Uploadujemy mosty'
-      - uses: actions/upload-artifact@v3.0.1      
+      - uses: actions/upload-artifact@v3      
         with:
           name: ${{ env.build_artifact }}
           path: ./${{ env.artifact_directory }}
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo '1) Sciagamy mosty '
-      - uses: actions/download-artifacts@v3
+      - uses: actions/download-artifact@v3
         with:
           name: ${{ env.build_artifact }}
       - run: echo '2) Tworzymy kontener'
