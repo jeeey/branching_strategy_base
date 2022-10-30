@@ -16,6 +16,7 @@ jobs:
   dockerize:
     name: Make docker
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     steps:
       - run: echo "Creating docker"
 
@@ -33,7 +34,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/user/app:latest
+          tags: ${{ env.REGISTRY }}/${{ github.actor }}/app:latest
 
   tagit:
     name: Tag production branch
