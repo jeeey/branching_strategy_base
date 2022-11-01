@@ -43,6 +43,7 @@ jobs:
     steps:
       - name: Tag step
         id: tag_version
-        uses: mathieudutour/github-tag-action@v6.0
+        uses: anothrNick/github-tag-action@v6.0.1
         with:
           github_token: ${{ secrets.TAG_TOKEN }}
+          default_bump: minor
