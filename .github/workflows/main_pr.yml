@@ -6,6 +6,9 @@ on:
       - main
     types: 
       - opened
+  push:
+    branches: 
+      - main
       
 jobs:
   
@@ -14,3 +17,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Squash me baby!"
+      - uses: actions/checkout@v3
+      - run: ls -a
